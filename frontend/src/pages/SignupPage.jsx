@@ -5,7 +5,7 @@ import Loader from '../components/Loader.jsx';
 // import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRegisterMutation } from '../slices/userApiSlice';
+import { useSignupMutation } from '../slices/usersApiSlice.js';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,7 @@ const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [register, { isLoading }] = useRegisterMutation();
+  const [signup, { isLoading }] = useSignupMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -35,7 +35,7 @@ const SignupPage = () => {
       toast.error('Passwords do not match');
     } else {
       try {
-        const res = await register({ name, email, password }).unwrap();
+        const res = await signup({ name, email, password }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate('/');
       } catch (err) {
@@ -45,7 +45,7 @@ const SignupPage = () => {
   };
   return (
     <FormContainer>
-      <h1>Register</h1>
+      <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className='my-2' controlId='name'>
           <Form.Label>Name</Form.Label>
@@ -85,12 +85,13 @@ const SignupPage = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        
+        {isLoading && <Loader />}
 
         <Button type='submit' variant='primary' className='mt-3'>
-          Register
+          Sign Up
         </Button>
 
-        {isLoading && <Loader />}
       </Form>
 
       <Row className='py-3'>

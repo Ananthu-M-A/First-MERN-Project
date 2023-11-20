@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer.jsx';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader.jsx';
-import { useUpdateUserMutation } from '../slices/userApiSlice';
+import { useUpdateUserMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 
 const ProfilePage = () => {
@@ -23,7 +23,7 @@ const ProfilePage = () => {
   useEffect(() => {
     setName(userInfo.name);
     setEmail(userInfo.email);
-  }, [userInfo.email, userInfo.name]);
+  }, [userInfo.setEmail, userInfo.setName]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -38,13 +38,14 @@ const ProfilePage = () => {
           password,
         }).unwrap();
         console.log(res);
-        dispatch(setCredentials(res));
+        dispatch(setCredentials({...res}));
         toast.success('Profile updated successfully');
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     }
   };
+
   return (
     <FormContainer>
       <h1>Update Profile</h1>
@@ -88,11 +89,11 @@ const ProfilePage = () => {
           ></Form.Control>
         </Form.Group>
 
+        {isLoading && <Loader />}
+
         <Button type='submit' variant='primary' className='mt-3'>
           Update
         </Button>
-
-        {isLoading && <Loader />}
       </Form>
     </FormContainer>
   );

@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoginMutation } from '../slices/userApiSlice.js';
+import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
-import Loader from '../components/Loader.jsx';
+import Loader from '../components/Loader';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -61,6 +61,8 @@ const LoginPage = () => {
           ></Form.Control>
         </Form.Group>
 
+        { isLoading && <h2><Loader /></h2> }
+
         <Button
           disabled={isLoading}
           type='submit'
@@ -75,7 +77,7 @@ const LoginPage = () => {
 
       <Row className='py-3'>
         <Col>
-          New Customer? <Link to='/register'>Register</Link>
+          New Customer? <Link to='/'>Sign Up</Link>
         </Col>
       </Row>
     </FormContainer>
