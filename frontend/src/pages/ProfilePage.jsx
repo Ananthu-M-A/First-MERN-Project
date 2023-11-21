@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer.jsx';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader.jsx';
 import { useUpdateUserMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
+import ImageDragDrop from '../components/ImageDragDrop.jsx';
 
 const ProfilePage = () => {
   const [email, setEmail] = useState('');
@@ -48,8 +49,13 @@ const ProfilePage = () => {
 
   return (
     <FormContainer>
-      <h1>Update Profile</h1>
-
+      <h1 className='text-center'>Update Profile</h1>
+      <br />
+      <Container>
+        <Row>
+      <ImageDragDrop />
+        </Row>
+      </Container>
       <Form onSubmit={submitHandler}>
         <Form.Group className='my-2' controlId='name'>
           <Form.Label>Name</Form.Label>

@@ -16,8 +16,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    profileImage: {
+        filename: String,
+        data: Buffer,
+    }
 },{
-    timeStamp: true
+    timeStamps: true
 });
 
 userSchema.pre('save', async function (next) {
