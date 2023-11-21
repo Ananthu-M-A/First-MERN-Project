@@ -1,6 +1,6 @@
-import Hero from '../components/Hero.jsx';
+import Products from '../components/Products.jsx';
 
 const HomePage = () => {
-  return <Hero />;
-}
+  return <Products />;
+};
 export default HomePage;

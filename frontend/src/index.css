@@ -7,3 +7,16 @@
     width: 100%;
     height: 2rem;
 }
+
+.ImageProduct{
+    width: 12rem;
+    height: 14rem;
+}
+
+h5{
+    cursor : pointer;
+}
+
+.FooterLogo{
+    width: 200px;
+}
