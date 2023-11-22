@@ -13,6 +13,7 @@ const App = () => {
       <Container className='my-2'>
         <Outlet />
       </Container>
+      <br /><br />
       <Footer />
     </>
   );

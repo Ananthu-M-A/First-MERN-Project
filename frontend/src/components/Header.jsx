@@ -1,5 +1,5 @@
 import { Navbar, Nav, Container, NavDropdown, Form, Button } from 'react-bootstrap';
-import { Cart4, Heart, Wallet2, Person, BagFill } from 'react-bootstrap-icons';
+import { Cart4, Heart, Wallet2, Person, PersonSquare, BagFill } from 'react-bootstrap-icons';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,9 +30,20 @@ const Header = () => {
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <img className='NavImg' onClick={() => navigate('/')} src="https://www.smartdepot.co.in/images/smart-depot1.png" alt="" />
-          <Navbar.Brand href="#home"></Navbar.Brand>
           {userInfo ? (
             <>
+          <Navbar.Collapse title={<><PersonSquare className='Icon' /></>} id='username' className="justify-content-end">
+            <Navbar.Brand href="#home">
+              <Nav>
+                <NavDropdown title={<><PersonSquare className='Icon' /></>} id='username'>
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item onClick={() => navigate('/profile')} variant='outline-success border-0'>{userInfo.name}</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Brand>
+          </Navbar.Collapse>
               <Form className="d-flex w-50">
                 <Form.Control
                   type="search"
@@ -49,18 +60,12 @@ const Header = () => {
             <Nav className='ms-auto'>
 
               {userInfo ? (
-                <Navbar.Collapse title={<><Person className='Icon' /></>} id='username' className="justify-content-end">
+                <Navbar.Collapse id='username' className="justify-content-end">
                   <Nav>
                     <Button onClick={() => navigate('/wishlist')} variant='outline-success border-0'><Heart className='Icon' /></Button>
                     <Button onClick={() => navigate('/cart')} variant='outline-success border-0'><Cart4 className='Icon' /></Button>
                     <Button onClick={() => navigate('/orders')} variant='outline-success border-0'><BagFill className='Icon' /></Button>
                     <Button onClick={() => navigate('/wallet')} variant='outline-success border-0'><Wallet2 className='Icon' /></Button>
-                    <NavDropdown title={<><Person className='Icon' /></>} id='username'>
-                      <LinkContainer to='/profile'>
-                          <NavDropdown.Item onClick={() => navigate('/profile')} variant='outline-success border-0'>{userInfo.name}</NavDropdown.Item>
-                      </LinkContainer>
-                      <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                    </NavDropdown>
                   </Nav>
                 </Navbar.Collapse>
               ) : (

@@ -32,7 +32,7 @@ app.post('/uploadProfilePic', upload.single('file'), async (req, res) => {
             { upsert: true, new: true }
         );
 
-        res.status(200).json({ message: 'File uploaded successfully' });
+        res.status(200).json({ message: 'File uploaded successfully', profileImage });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
