@@ -1,5 +1,5 @@
 import { Navbar, Nav, Container, NavDropdown, Form, Button } from 'react-bootstrap';
-import { Cart4, Heart, Wallet2, Person, PersonSquare, BagFill } from 'react-bootstrap-icons';
+import { Cart4, Heart, Wallet2, PersonSquare, BagFill } from 'react-bootstrap-icons';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -75,6 +75,11 @@ const Header = () => {
               <LinkContainer to='/signup'>
                 <Nav.Link>
                   <FaSignOutAlt /> Sign Up
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/adminLogin'>
+                <Nav.Link>
+                  <FaSignInAlt /> Admin Panel
                 </Nav.Link>
               </LinkContainer>
             </>

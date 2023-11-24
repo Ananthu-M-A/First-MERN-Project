@@ -39,6 +39,24 @@ app.post('/uploadProfilePic', upload.single('file'), async (req, res) => {
     }
 });
 
+// In your Express server
+app.get('/getProfilePic/:userId', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const user = await User.findById(userId);
+  
+      if (!user || !user.profileImage) {
+        return res.status(404).json({ message: 'Image not found' });
+      }
+  
+      res.json({ profileImage: user.profileImage });
+    } catch (error) {
+      console.error('Error retrieving image:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+  
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
