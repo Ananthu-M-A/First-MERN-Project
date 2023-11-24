@@ -16,6 +16,11 @@ import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import WishListPage from './pages/WishListPage.jsx';
+import CartPage from './pages/CartPage.jsx';
+import OrdersPage from './pages/OrdersPage.jsx';
+import WalletPage from './pages/WalletPage.jsx';
+import ViewProductPage from './pages/ViewProductPage.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +30,11 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<SignupPage />} />
       <Route path='' element={<PrivateRoute />}>
         <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/wishlist' element={<WishListPage />} />
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='/orders' element={<OrdersPage />} />
+        <Route path='/wallet' element={<WalletPage />} />
+        <Route path='/viewProduct' element={<ViewProductPage />} />
       </Route>
     </Route>
   )

@@ -67,6 +67,8 @@
             email : req.user.email,
         };
 
+        console.log(user);
+
         res.status(200).json({message: 'Get User Profile'});
     });
 

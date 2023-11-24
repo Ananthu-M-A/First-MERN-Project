@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Row } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer.jsx';
 import { toast } from 'react-toastify';
@@ -8,6 +8,7 @@ import Loader from '../components/Loader.jsx';
 import { useUpdateUserMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import ImageDragDrop from '../components/ImageDragDrop.jsx';
+import ViewImage from '../components/ViewImage.jsx';
 
 const ProfilePage = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +40,7 @@ const ProfilePage = () => {
           password,
         }).unwrap();
         console.log(res);
-        dispatch(setCredentials({...res}));
+        dispatch(setCredentials({ ...res }));
         toast.success('Profile updated successfully');
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -53,7 +54,10 @@ const ProfilePage = () => {
       <br />
       <Container>
         <Row>
-      <ImageDragDrop />
+            <ImageDragDrop />
+        </Row>
+        <Row>
+            <ViewImage />
         </Row>
       </Container>
       <Form onSubmit={submitHandler}>

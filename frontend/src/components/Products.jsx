@@ -78,7 +78,7 @@ const Products = () => {
                   <Button onClick={() => navigate('/cart')} className='g-3' variant="dark"><CartPlus className='Icon' /></Button>
                 </Col>
                 <Col>
-                  <Button onClick={() => navigate('/productDetail')} className='g-3' variant="dark"><Eye className='Icon' /></Button>
+                  <Button onClick={() => navigate('/viewProduct')} className='g-3' variant="dark"><Eye className='Icon' /></Button>
                 </Col>
                 <Col>
                   <Button onClick={() => navigate('/wishlist')} className='g-3' variant="dark"><Heart className='Icon' /></Button>
