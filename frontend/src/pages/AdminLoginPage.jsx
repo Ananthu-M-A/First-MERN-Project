@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoginMutation } from '../slices/usersApiSlice';
-import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
+import { adminSetCredentials } from '../slices/adminSlice.js';
+import { useAdminLoginMutation } from '../slices/adminApiSlice.js';
 
 const AdminLoginPage = () => {
   const [email, setEmail] = useState('');
@@ -15,21 +15,21 @@ const AdminLoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [adminLogin, { isLoading }] = useAdminLoginMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { adminInfo } = useSelector((state) => state.admin);
 
   useEffect(() => {
-    if (userInfo) {
+    if (adminInfo) {
       navigate('/');
     }
-  }, [navigate, userInfo]);
+  }, [navigate, adminInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
+      const res = await adminLogin({ email, password }).unwrap();
+      dispatch(adminSetCredentials({ ...res }));
       navigate('/');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -38,11 +38,11 @@ const AdminLoginPage = () => {
 
   return (
     <FormContainer>
-    <h1>Welcome to Admin Panel</h1>
+      <h1 className='text-center'>Admin Panel</h1>
       <h3 className='text-center'>Sign In</h3>
 
       <Form onSubmit={submitHandler}>
-        <Form.Group className='my-2 right' controlId='email'>
+        <Form.Group className='my-2' controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type='email'

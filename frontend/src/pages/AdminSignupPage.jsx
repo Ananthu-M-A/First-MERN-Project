@@ -4,11 +4,11 @@ import FormContainer from '../components/FormContainer.jsx';
 import Loader from '../components/Loader.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSignupMutation } from '../slices/usersApiSlice.js';
-import { setCredentials } from '../slices/authSlice';
+import { useAdminSignupMutation } from '../slices/adminApiSlice.js';
+import { adminSetCredentials } from '../slices/adminSlice.js';
 import { toast } from 'react-toastify';
 
-const SignupPage = () => {
+const AdminSignupPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,26 +17,26 @@ const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [signup, { isLoading }] = useSignupMutation();
+  const [adminSignup, { isLoading }] = useAdminSignupMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const {adminInfo} = useSelector((state) => state.admin);
 
   useEffect(() => {
-    if (userInfo) {
-      navigate('/');
+    if (adminInfo) {
+      navigate('/adminHome');
     }
-  }, [navigate, userInfo]);
+  }, [navigate, adminInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
     } else {
       try {
-        const res = await signup({ name, email, password }).unwrap();
-        dispatch(setCredentials({ ...res }));
-        navigate('/login');
+        const res = await adminSignup({ name, email, password }).unwrap();
+        console.log();
+        dispatch(adminSetCredentials({ ...res }));
+        navigate('/adminLogin');
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
@@ -44,8 +44,8 @@ const SignupPage = () => {
   };
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
-      <Form onSubmit={submitHandler}>
+      <h1 className='text-center'>Admin Panel</h1>
+      <h3 className='text-center'>Sign Up</h3>      <Form onSubmit={submitHandler}>
         <Form.Group className='my-2' controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -95,11 +95,11 @@ const SignupPage = () => {
 
       <Row className='py-3'>
         <Col>
-          Already have an account? <Link to={`/login`}>Login</Link>
+          Already have an account? <Link to={`/adminLogin`}>Admin Login</Link>
         </Col>
       </Row>
     </FormContainer>
   );
 };
 
-export default SignupPage;
+export default AdminSignupPage;

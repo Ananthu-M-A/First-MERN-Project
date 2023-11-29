@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from 'bcryptjs';
 
 
-const userSchema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -16,15 +16,11 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    profileImage: {
-        filename: String,
-        data: Buffer,
-    }
 },{
     timestamps: true
 });
 
-userSchema.pre('save', async function (next) {
+adminSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
         next();
     }
@@ -33,9 +29,9 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.methods.matchPasswords = async function (enteredPassword){
+adminSchema.methods.matchPasswords = async function (enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password);
 }
 
-const User = mongoose.model('User',userSchema);
-export default User;
+const Admin = mongoose.model('Admin',adminSchema);
+export default Admin;

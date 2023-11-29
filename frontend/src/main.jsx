@@ -21,8 +21,10 @@ import CartPage from './pages/CartPage.jsx';
 import OrdersPage from './pages/OrdersPage.jsx';
 import WalletPage from './pages/WalletPage.jsx';
 import ViewProductPage from './pages/ViewProductPage.jsx';
-import AdminLoginPage from './pages/AdminLoginPage.jsx';
-import AdminHomePage from './pages/AdminHomePage.jsx';
+// import AdminSignupPage from './pages/AdminSignupPage.jsx';
+// import AdminLoginPage from './pages/AdminLoginPage.jsx';
+// import AdminHomePage from './pages/AdminHomePage.jsx';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,8 +40,9 @@ const router = createBrowserRouter(
         <Route path='/wallet' element={<WalletPage />} />
         <Route path='/viewProduct' element={<ViewProductPage />} />
       </Route>
-      <Route path='/adminLogin' element={<AdminLoginPage />} />
-      <Route path='/adminHome' element={<AdminHomePage />} />
+        {/* <Route path='/adminSignup' element={<AdminSignupPage />} />
+        <Route path='/adminLogin' element={<AdminLoginPage />} />
+        <Route path='/adminHome' element={<AdminHomePage />} /> */}
       </Route>
   )
 );

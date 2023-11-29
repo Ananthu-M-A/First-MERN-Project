@@ -43,7 +43,8 @@
             res.status(400);
             throw new Error("Invalid userdata");
         }
-        res.status(200).json({message: 'Auth User'});});
+        res.status(200).json({message: 'Auth User'});
+    });
 
     // Logout User
     // POST /api/users/logout

@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDb from './config/db.js';
 const port = process.env.PORT || 4000;
 import userRoutes from './routes/userRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 import multer from 'multer';
 import mongoose from 'mongoose';
 import User from './models/userModel.js'; 
@@ -19,6 +20,8 @@ app.use(cors());
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+
 
 app.post('/uploadProfilePic', upload.single('file'), async (req, res) => {
     try {
@@ -64,6 +67,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
+
 
 app.get('/', (req, res) => res.send('SERVER STARTED'));
 

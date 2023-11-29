@@ -6,9 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/usersApiSlice.js';
 import { logout } from '../slices/authSlice';
+// import { adminLogout } from '../slices/adminSlice.js';
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
+  // const { adminInfo } = useSelector((state) => state.admin);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,8 +19,9 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      await logoutApiCall().unwrap();
+      await logoutApiCall();
       dispatch(logout());
+      dispatch(adminLogout());
       navigate('/login');
     } catch (err) {
       console.error(err);

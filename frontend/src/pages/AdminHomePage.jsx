@@ -1,9 +1,11 @@
 import Table from 'react-bootstrap/Table';
 import { PencilFill, PersonAdd, PersonDash, Search } from 'react-bootstrap-icons';
 import { Col, InputGroup, Form, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 const AdminHomePage = () => {
-
+    const { adminInfo } = useSelector((state) => state.admin);
+    console.log(adminInfo);
     return (
         <>
             <h1 className='text-center m-3 p-3'>User Data</h1>
